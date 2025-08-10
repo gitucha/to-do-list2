@@ -1,7 +1,10 @@
   import React, { useState } from 'react';
 
 function TodoList() {
-    const [tasks, setTasks] = useState(["Learn React", "Decide on react Capstone", "Do react Capstone"]);
+    const [tasks, setTasks] = useState([ { text: "Learn React", completed: false},
+                                         { text: "Revise react", completed: false},
+                                         { text: "Do react capstone", completed: false},
+                                        ]);
     const [newTask, setNewTask] = useState("");
     const [editIndex, setEditIndex] = useState(null);
 
@@ -11,6 +14,7 @@ function TodoList() {
 
     function addTask() {
         if (newTask !== "") {
+             const newTask = { text: newTask.trim(), completed: false };
             setTasks(tasks => [...tasks, newTask]);
             setNewTask("");
         }
@@ -35,6 +39,13 @@ function TodoList() {
             setNewTask("");
         }
     }
+     
+    const toggleComplete = (index) => {
+        setTasks( 
+            tasks.map((task, i) => i === index ? {...tasks, completed: !task.completed } : task)); 
+    }
+
+    
 
     return (
         <div className="min-h-screen bg-pink-100 flex items-center justify-center p-6">
@@ -66,13 +77,17 @@ function TodoList() {
                     )}
                 </div>
 
+                    <div className=" flex-col items-center p-3">
+                     <input type="text" placeholder='Looking for a task?' className=' border border-gray-400 rounded-2xl flex-col items-center p-1'/>
+                    </div>
+
                 <ol className="space-y-3">
                     {tasks.map((task, index) => (
                         <li
                             key={index}
                             className="flex justify-between items-center bg-gray-100 px-4 py-3 rounded-lg shadow-sm border border-gray-200 transform transition-all duration-300 hover:scale-[1.02] animate-fade-in"
                         >
-                            <div className="text-gray-800 font-medium flex-1">{task}</div>
+                            <div className="text-gray-800 font-medium flex-1">{task.text}</div>
                             <div className="flex gap-2 ml-4">
                                 <button
                                     onClick={() => editTask(index)}
@@ -86,6 +101,11 @@ function TodoList() {
                                 >
                                      Delete
                                 </button>
+
+                                <input type="checkbox" style={{backgroundColor: task.completed ? 'bl' : 'none' }}
+                                        onClick={() => toggleComplete(index)}
+                                />
+
                             </div>
                         </li>
                     ))}
