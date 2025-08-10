@@ -55,9 +55,9 @@ function TodoList() {
      )
 
     return (
-        <div className="min-h-screen bg-pink-100 flex items-center justify-center p-6">
-            <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 transform transition-all duration-300 animate-fade-in">
-                <h1 className="text-3xl font-extrabold mb-6 text-center text-indigo-700"> To-Do List</h1>
+        <div className="min-h-screen bg-stone-500 flex items-center justify-center p-6  ">
+            <div className="w-full max-w-xl bg-stone-100 rounded-2xl shadow-xl p-8 transform transition-all duration-300 animate-fade-in  ">
+                <h1 className="text-3xl font-extrabold mb-6 text-center text-green-800"> To-Do List</h1>
 
                 <div className="flex flex-col sm:flex-row gap-3 mb-6">
                     <input
@@ -103,7 +103,7 @@ function TodoList() {
                             <div className="flex gap-2 ml-4">
                                 <button
                                     onClick={() => editTask(index)}
-                                    className="bg-yellow-400 hover:bg-yellow-500 text-white text-sm px-3 py-1 rounded-lg transition-all duration-200"
+                                    className="bg-amber-600 hover:bg-amber-800 text-white text-sm px-3 py-1 rounded-lg transition-all duration-200"
                                 >
                                     Edit
                                 </button>
