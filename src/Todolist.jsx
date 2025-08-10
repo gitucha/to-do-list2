@@ -7,6 +7,7 @@ function TodoList() {
                                         ]);
     const [newTask, setNewTask] = useState("");
     const [editIndex, setEditIndex] = useState(null);
+    const [search, setSearch] = useState('')
 
     function handleInputChange(event) {
         setNewTask(event.target.value);
@@ -45,7 +46,13 @@ function TodoList() {
             tasks.map((task, i) => i === index ? {...tasks, completed: !task.completed } : task)); 
     }
 
-    
+    const handleSearch = (event) =>{
+        setSearch(event.target.value)
+    }
+
+    const filteredTasks = tasks.filter(task => 
+        task.text.toLowerCase().includes(search.toLowerCase())
+     )
 
     return (
         <div className="min-h-screen bg-pink-100 flex items-center justify-center p-6">
@@ -78,11 +85,16 @@ function TodoList() {
                 </div>
 
                     <div className=" flex-col items-center p-3">
-                     <input type="text" placeholder='Looking for a task?' className=' border border-gray-400 rounded-2xl flex-col items-center p-1'/>
+                     <input type="text" 
+                     placeholder='Looking for a task?' 
+                     className=' border border-gray-400 rounded-2xl flex-col items-center p-1'
+                     value={search}
+                     onChange={handleSearch}
+                     />
                     </div>
 
                 <ol className="space-y-3">
-                    {tasks.map((task, index) => (
+                    {filteredTasks.map((task, index) => (
                         <li
                             key={index}
                             className="flex justify-between items-center bg-gray-100 px-4 py-3 rounded-lg shadow-sm border border-gray-200 transform transition-all duration-300 hover:scale-[1.02] animate-fade-in"
@@ -102,7 +114,7 @@ function TodoList() {
                                      Delete
                                 </button>
 
-                                <input type="checkbox" style={{backgroundColor: task.completed ? 'bl' : 'none' }}
+                                <input type="checkbox" style={{backgroundColor: task.completed ? 'blue' : 'none' }}
                                         onClick={() => toggleComplete(index)}
                                 />
 
